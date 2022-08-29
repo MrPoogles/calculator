@@ -1,6 +1,7 @@
 const lastScreen = document.querySelector(".lastOperationScreen");
 const calScreen = document.querySelector(".currentOperationScreen");
 const numberButtons = document.querySelectorAll(".button");
+const zeroButton = document.querySelector(".zeroButton");
 const operatorButton = document.querySelectorAll(".operatorButton")
 const equalButton = document.querySelector(".equalButton")
 const deleteButton = document.querySelector(".deleteButton");
@@ -52,9 +53,27 @@ const operate = function(a,operator,b) {
 numberButtons.forEach(button => button.addEventListener("click", (e) => {
   if (lastScreen.textContent.includes("=")) { //prevents inputting additional number after operating with equal sign.
     return;
+  } 
+  if (!inputSecondNumber) {
+    if (calScreen.textContent == "0") { //prevents showing zero as first number.
+      a = "";
+    }
+    a += e.target.value;
+    calScreen.textContent = a;
+  } else if (inputSecondNumber) {
+    if (calScreen.textContent == "0") { //prevents showing zero as first number.
+      b = "";
+    }
+    b += e.target.value;
+    calScreen.textContent = b;
   }
-  if (calScreen.textContent === 0) {
-    calScreen.textContent = "";
+}))
+
+zeroButton.addEventListener("click", (e) => {
+  if (calScreen.textContent == "0") { //prevents multi zero input if point not appended.
+    return;
+  } else if (lastScreen.textContent.includes("=")) {
+    return;
   }
   if (!inputSecondNumber) {
     a += e.target.value;
@@ -63,7 +82,7 @@ numberButtons.forEach(button => button.addEventListener("click", (e) => {
     b += e.target.value;
     calScreen.textContent = b;
   }
-}))
+})
 
 operatorButton.forEach(button => button.addEventListener("click", (e) => {
   if (a === '' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
