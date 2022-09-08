@@ -7,6 +7,7 @@ const equalButton = document.querySelector(".equalButton")
 const deleteButton = document.querySelector(".deleteButton");
 const clearButton = document.querySelector(".clearButton");
 const decimalButton = document.querySelector(".decimalButton");
+const negativeButton = document.querySelector(".negativeButton");
 
 let a = '';
 let b = '';
@@ -70,7 +71,7 @@ numberButtons.forEach(button => button.addEventListener("click", (e) => {
 }))
 
 zeroButton.addEventListener("click", (e) => {
-  if (calScreen.textContent == "0") { //prevents multi zero input if point not appended.
+  if (calScreen.textContent == "0" || calScreen.textContent == "-0") { //prevents multi zero input if point not appended.
     return;
   } else if (lastScreen.textContent.includes("=")) {
     return;
@@ -149,16 +150,47 @@ deleteButton.addEventListener("click", () => {
 
 decimalButton.addEventListener("click", (e) => {
   if (!inputSecondNumber) {
-    if (a.includes(".")) {
+    if (a.includes(".") || calScreen.textContent == "-") {
       return;
     };
     a += e.target.value
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
-    if (b.includes(".")) {
+    if (b.includes(".") || calScreen.textContent == "-") {
       return;
     };
     b += e.target.value
+    calScreen.textContent = b;
+  }
+})
+
+negativeButton.addEventListener("click", () => {
+  if (inputSecondNumber && lastScreen.textContent.includes("=")) {
+    a = a*(-1);
+    calScreen.textContent = a;
+  } else if (!inputSecondNumber) {
+    if (a === "") {
+      a = "-";
+      calScreen.textContent = a;
+      return;
+    } else if (a === "-") {
+      a = "";
+      calScreen.textContent = "_";
+      return;
+    }
+    a = a*(-1);
+    calScreen.textContent = a;
+  } else if (inputSecondNumber) {
+    if (b === "") {
+      b = "-";
+      calScreen.textContent = b;
+      return;
+    } else if (b === "-") {
+      b = "";
+      calScreen.textContent = "_";
+      return;
+    }
+    b = b*(-1);
     calScreen.textContent = b;
   }
 })
