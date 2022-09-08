@@ -86,9 +86,9 @@ zeroButton.addEventListener("click", (e) => {
 })
 
 operatorButton.forEach(button => button.addEventListener("click", (e) => {
-  if (a === '' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
+  if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
     return;
-  } else if (b === '') {
+  } else if (b === '' || b === '-') { //prevents operate function to happen if b is undefined.
     a = parseFloat(a);
     operator = e.target.value;
     lastScreen.textContent = `${a} ${operator}`;
