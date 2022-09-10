@@ -101,8 +101,56 @@ const appendZero = function(zero) {
   }
 }
 
+const appendEqual = function() {
+  //prevents operating when a has not been inputted or b is not defined.
+  if (inputSecondNumber === false || !b) {
+    return;
+  };
+  b = parseFloat(b);
+  operate(a, operator, b);
+  lastScreen.textContent = `${a} ${operator} ${b} =`;
+  calScreen.textContent = result;
+  a = result;
+  b = "";
+  inputSecondNumber = true;
+  operator = '';
+}
+
+const clearAll = function() {
+  a = '';
+  b = '';
+  operator = '';
+  result = '';
+  inputSecondNumber = false;
+  lastScreen.textContent = '';
+  calScreen.textContent = '_';
+}
+
+const deleteNumber = function() {
+  if (lastScreen.textContent.includes("=")) {
+    return;
+  }
+  if (!inputSecondNumber) {
+    a = a.toString().slice(0, -1);
+    calScreen.textContent = a;
+    if (calScreen.textContent === "") {
+      calScreen.textContent = '_';
+    };
+  } else if (inputSecondNumber) {
+    b = b.toString().slice(0, -1);
+    calScreen.textContent = b;
+    if (calScreen.textContent === "") {
+      calScreen.textContent = '_';
+    };
+  }
+}
+
 numberButtons.forEach(button => button.addEventListener("click", (e) => appendNumber(e.target.value)));
 zeroButton.addEventListener("click", (e) => appendZero(e.target.value));
+
+equalButton.addEventListener("click", appendEqual);
+clearButton.addEventListener("click", clearAll);
+deleteButton.addEventListener("click", deleteNumber);
 
 operatorButton.forEach(button => button.addEventListener("click", (e) => {
   if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
@@ -123,49 +171,6 @@ operatorButton.forEach(button => button.addEventListener("click", (e) => {
     inputSecondNumber = true; //value is true in order to redefine b.
   }
 }))
-
-equalButton.addEventListener("click", () => {
-  if (inputSecondNumber === false || !b) { //prevents operating when a has not been inputted or b is not defined.
-    return;
-  };
-  b = parseFloat(b);
-  operate(a, operator, b);
-  lastScreen.textContent = `${a} ${operator} ${b} =`;
-  calScreen.textContent = result;
-  a = result;
-  b = "";
-  inputSecondNumber = true;
-  operator = '';
-})
-
-clearButton.addEventListener("click", () => {
-  a = '';
-  b = '';
-  operator = '';
-  result = '';
-  inputSecondNumber = false;
-  lastScreen.textContent = '';
-  calScreen.textContent = '_';
-})
-
-deleteButton.addEventListener("click", () => {
-  if (lastScreen.textContent.includes("=")) {
-    return;
-  }
-  if (!inputSecondNumber) {
-    a = a.toString().slice(0, -1);
-    calScreen.textContent = a;
-    if (calScreen.textContent === "") {
-      calScreen.textContent = '_';
-    };
-  } else if (inputSecondNumber) {
-    b = b.toString().slice(0, -1);
-    calScreen.textContent = b;
-    if (calScreen.textContent === "") {
-      calScreen.textContent = '_';
-    };
-  }
-})
 
 decimalButton.addEventListener("click", (e) => {
   if (!inputSecondNumber) {
