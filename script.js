@@ -230,3 +230,17 @@ clearButton.addEventListener("click", clearAll);
 deleteButton.addEventListener("click", deleteNumber);
 decimalButton.addEventListener("click", (e) => appendDecimal(e.target.value));
 negativeButton.addEventListener("click", appendUnappendNegative);
+
+// Keyboard Input
+document.addEventListener('keydown', (e) => {
+  console.log(e.key);
+  if (e.key >= 1 && e.key <= 9) appendNumber(e.key);
+  if (e.key == 0) appendZero(e.key);
+  if (e.key == 'Enter') appendEqual();
+  if (e.key == 'Delete') clearAll();
+  if (e.key == 'Backspace') deleteNumber();
+  if (e.key == '.') appendDecimal(e.key);
+  if (e.key == '+' || e.key == '-') appendOperator(e.key);
+  if (e.key == '*') appendOperator('×');
+  if (e.key == '/') appendOperator('÷');
+})
