@@ -147,12 +147,20 @@ const deleteNumber = function() {
 
 const appendDecimal = function(decimal) {
   if (!inputSecondNumber) {
+    if (a == '') {
+      a = '0.'
+      calScreen.textContent = a;
+    }
     if (a.includes(".") || calScreen.textContent == "-") {
       return;
     };
     a += decimal
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
+    if (b == '') {
+      b = '0.'
+      calScreen.textContent = b;
+    }
     if (b.includes(".") || calScreen.textContent == "-") {
       return;
     };
