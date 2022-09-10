@@ -145,50 +145,23 @@ const deleteNumber = function() {
   }
 }
 
-numberButtons.forEach(button => button.addEventListener("click", (e) => appendNumber(e.target.value)));
-zeroButton.addEventListener("click", (e) => appendZero(e.target.value));
-
-equalButton.addEventListener("click", appendEqual);
-clearButton.addEventListener("click", clearAll);
-deleteButton.addEventListener("click", deleteNumber);
-
-operatorButton.forEach(button => button.addEventListener("click", (e) => {
-  if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
-    return;
-  } else if (b === '' || b === '-') { //prevents operate function to happen if b is undefined.
-    a = parseFloat(a);
-    operator = e.target.value;
-    lastScreen.textContent = `${a} ${operator}`;
-    inputSecondNumber = true;
-  } else { //condition will happen if user press operator button(instead of equal) to show calculation result.
-    b = parseFloat(b);
-    operate(a, operator, b); //operate will return result.
-    calScreen.textContent = result; //display result on screen.
-    a = result; //value of a is the result of operate function.
-    operator = e.target.value; //value of operator is defined.
-    lastScreen.textContent = `${a} ${operator}`; //display a with value of result and operator.
-    b = ""; //thus value of b will be undefined and need to be redefined.
-    inputSecondNumber = true; //value is true in order to redefine b.
-  }
-}))
-
-decimalButton.addEventListener("click", (e) => {
+const appendDecimal = function(decimal) {
   if (!inputSecondNumber) {
     if (a.includes(".") || calScreen.textContent == "-") {
       return;
     };
-    a += e.target.value
+    a += decimal
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
     if (b.includes(".") || calScreen.textContent == "-") {
       return;
     };
-    b += e.target.value
+    b += decimal
     calScreen.textContent = b;
   }
-})
+}
 
-negativeButton.addEventListener("click", () => {
+const appendUnappendNegative = function() {
   if (inputSecondNumber && lastScreen.textContent.includes("=")) {
     a = a*(-1);
     calScreen.textContent = a;
@@ -217,4 +190,33 @@ negativeButton.addEventListener("click", () => {
     b = b*(-1);
     calScreen.textContent = b;
   }
-})
+}
+
+numberButtons.forEach(button => button.addEventListener("click", (e) => appendNumber(e.target.value)));
+zeroButton.addEventListener("click", (e) => appendZero(e.target.value));
+
+equalButton.addEventListener("click", appendEqual);
+clearButton.addEventListener("click", clearAll);
+deleteButton.addEventListener("click", deleteNumber);
+decimalButton.addEventListener("click", (e) => appendDecimal(e.target.value));
+negativeButton.addEventListener("click", appendUnappendNegative);
+
+operatorButton.forEach(button => button.addEventListener("click", (e) => {
+  if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
+    return;
+  } else if (b === '' || b === '-') { //prevents operate function to happen if b is undefined.
+    a = parseFloat(a);
+    operator = e.target.value;
+    lastScreen.textContent = `${a} ${operator}`;
+    inputSecondNumber = true;
+  } else { //condition will happen if user press operator button(instead of equal) to show calculation result.
+    b = parseFloat(b);
+    operate(a, operator, b); //operate will return result.
+    calScreen.textContent = result; //display result on screen.
+    a = result; //value of a is the result of operate function.
+    operator = e.target.value; //value of operator is defined.
+    lastScreen.textContent = `${a} ${operator}`; //display a with value of result and operator.
+    b = ""; //thus value of b will be undefined and need to be redefined.
+    inputSecondNumber = true; //value is true in order to redefine b.
+  }
+}))
