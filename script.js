@@ -51,30 +51,37 @@ const operate = function(a,operator,b) {
   }
 }
 
-numberButtons.forEach(button => button.addEventListener("click", (e) => {
-  if (lastScreen.textContent.includes("=")) { //prevents inputting additional number after operating with equal sign.
+const appendNumber = function(number) {
+  //prevents inputting additional number after operating with equal sign.
+  if (lastScreen.textContent.includes("=")) {
     return;
   } 
   if (!inputSecondNumber) {
     if (a.toString().length === 12) {
       return;
     }
-    if (calScreen.textContent == "0") { //prevents showing zero as first number.
+    //prevents showing zero as first number.
+    if (calScreen.textContent == "0") {
       a = "";
     }
-    a += e.target.value;
+    a += number;
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
     if (b.toString().length === 12) {
       return;
     }
-    if (calScreen.textContent == "0") { //prevents showing zero as first number.
+    //prevents showing zero as first number.
+    if (calScreen.textContent == "0") {
       b = "";
     }
-    b += e.target.value;
+    b += number;
     calScreen.textContent = b;
   }
-}))
+}
+
+numberButtons.forEach(button => button.addEventListener("click", (e) => {
+  appendNumber(e.target.value)
+}));
 
 zeroButton.addEventListener("click", (e) => {
   if (calScreen.textContent == "0" || calScreen.textContent == "-0") { //prevents multi zero input if point not appended.
