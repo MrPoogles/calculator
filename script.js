@@ -200,31 +200,33 @@ const appendUnappendNegative = function() {
   }
 }
 
+const appendOperator = function(operatorSymbol) {
+  //prevents operator input if a is undefined or ERROR is on the screen.
+  if (a === '' || a === '-' || result === "ERROR") {
+    return;
+  //prevents operate function to happen if b is undefined.
+  } else if (b === '' || b === '-') {
+    a = parseFloat(a);
+    operator = operatorSymbol;
+    lastScreen.textContent = `${a} ${operator}`;
+    inputSecondNumber = true;
+  } else {
+    b = parseFloat(b);
+    operate(a, operator, b);
+    calScreen.textContent = result;
+    a = result;
+    operator = operatorSymbol;
+    lastScreen.textContent = `${a} ${operator}`;
+    b = "";
+    inputSecondNumber = true;
+  }
+}
+
 numberButtons.forEach(button => button.addEventListener("click", (e) => appendNumber(e.target.value)));
 zeroButton.addEventListener("click", (e) => appendZero(e.target.value));
-
+operatorButton.forEach(button => button.addEventListener("click", (e) => appendOperator(e.target.value)));
 equalButton.addEventListener("click", appendEqual);
 clearButton.addEventListener("click", clearAll);
 deleteButton.addEventListener("click", deleteNumber);
 decimalButton.addEventListener("click", (e) => appendDecimal(e.target.value));
 negativeButton.addEventListener("click", appendUnappendNegative);
-
-operatorButton.forEach(button => button.addEventListener("click", (e) => {
-  if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
-    return;
-  } else if (b === '' || b === '-') { //prevents operate function to happen if b is undefined.
-    a = parseFloat(a);
-    operator = e.target.value;
-    lastScreen.textContent = `${a} ${operator}`;
-    inputSecondNumber = true;
-  } else { //condition will happen if user press operator button(instead of equal) to show calculation result.
-    b = parseFloat(b);
-    operate(a, operator, b); //operate will return result.
-    calScreen.textContent = result; //display result on screen.
-    a = result; //value of a is the result of operate function.
-    operator = e.target.value; //value of operator is defined.
-    lastScreen.textContent = `${a} ${operator}`; //display a with value of result and operator.
-    b = ""; //thus value of b will be undefined and need to be redefined.
-    inputSecondNumber = true; //value is true in order to redefine b.
-  }
-}))
