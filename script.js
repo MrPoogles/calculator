@@ -79,12 +79,9 @@ const appendNumber = function(number) {
   }
 }
 
-numberButtons.forEach(button => button.addEventListener("click", (e) => {
-  appendNumber(e.target.value)
-}));
-
-zeroButton.addEventListener("click", (e) => {
-  if (calScreen.textContent == "0" || calScreen.textContent == "-0") { //prevents multi zero input if point not appended.
+const appendZero = function(zero) {
+  //prevents multi zero input if point not appended.
+  if (calScreen.textContent == "0" || calScreen.textContent == "-0") {
     return;
   } else if (lastScreen.textContent.includes("=")) {
     return;
@@ -93,16 +90,19 @@ zeroButton.addEventListener("click", (e) => {
     if (a.toString().length === 12) {
       return;
     }
-    a += e.target.value;
+    a += zero;
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
     if (b.toString().length === 12) {
       return;
     }
-    b += e.target.value;
+    b += zero;
     calScreen.textContent = b;
   }
-})
+}
+
+numberButtons.forEach(button => button.addEventListener("click", (e) => appendNumber(e.target.value)));
+zeroButton.addEventListener("click", (e) => appendZero(e.target.value));
 
 operatorButton.forEach(button => button.addEventListener("click", (e) => {
   if (a === '' || a === '-' || result === "ERROR") { //prevents operator input if a is undefined or ERROR is on the screen.
