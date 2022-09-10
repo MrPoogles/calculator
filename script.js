@@ -56,12 +56,18 @@ numberButtons.forEach(button => button.addEventListener("click", (e) => {
     return;
   } 
   if (!inputSecondNumber) {
+    if (a.toString().length === 12) {
+      return;
+    }
     if (calScreen.textContent == "0") { //prevents showing zero as first number.
       a = "";
     }
     a += e.target.value;
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
+    if (b.toString().length === 12) {
+      return;
+    }
     if (calScreen.textContent == "0") { //prevents showing zero as first number.
       b = "";
     }
@@ -77,9 +83,15 @@ zeroButton.addEventListener("click", (e) => {
     return;
   }
   if (!inputSecondNumber) {
+    if (a.toString().length === 12) {
+      return;
+    }
     a += e.target.value;
     calScreen.textContent = a;
   } else if (inputSecondNumber) {
+    if (b.toString().length === 12) {
+      return;
+    }
     b += e.target.value;
     calScreen.textContent = b;
   }
