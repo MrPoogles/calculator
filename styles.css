@@ -89,3 +89,31 @@ button {
 .deleteButton {
   background-color: #414a4c;
 }
+
+button:hover {
+  background-color: #35383999;
+}
+
+button:active {
+  background-color: #353839bb;
+}
+
+.operatorButton:hover, 
+.equalButton:hover {
+  background-color: #3b444b99;
+}
+
+.operatorButton:active, 
+.equalButton:active {
+  background-color: #3b444bbb;
+}
+
+.clearButton:hover, 
+.deleteButton:hover {
+  background-color: #414a4c99;
+}
+
+.clearButton:active, 
+.deleteButton:active {
+  background-color: #414a4cbb;
+}
