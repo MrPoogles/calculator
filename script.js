@@ -240,6 +240,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key == 'Delete') clearAll();
   if (e.key == 'Backspace') deleteNumber();
   if (e.key == '.') appendDecimal(e.key);
+  if (e.key == 'Control') appendUnappendNegative();
   if (e.key == '+' || e.key == '-') appendOperator(e.key);
   if (e.key == '*') appendOperator('×');
   if (e.key == '/') appendOperator('÷');
