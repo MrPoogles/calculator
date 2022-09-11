@@ -1,13 +1,26 @@
+body {
+  background-color: #414a4c;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#mainPage {
+  height: 850px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .calculatorContainer {
-  height: 800px;
-  width: 550px;
-  border: 1px solid black;
+  height: 700px;
+  width: 525px;
+  border: 5px solid black;
+  background-color: #0e1111;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 2%;
+  border-radius: 10px;
 }
 
 .calculatorScreen {
@@ -16,7 +29,10 @@
   box-sizing: border-box;
   height: 200px;
   width: 475px;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #3b444b;
+  color: #ececec;
 }
 
 .lastOperationScreen {
@@ -39,38 +55,37 @@
   height: 100px;
   width: 475px;
   padding: 10px;
-  font-size: 70px;
+  font-size: 60px;
   overflow: hidden;
 }
 
 .calculatorButtons {
   box-sizing: border-box;
-  height: 500px;
+  height: 400px;
   width: 475px;
   display: inline-grid;
-  gap: 10px;
+  gap: 5px;
   grid-template-columns: repeat(4, 1fr);
 }
 
 button {
-  font-size: 40px;
+  font-size: 45px;
+  border-radius: 25px;
+  border: 2px solid black;
+  color: #ececec;
+  background-color: #353839;
 }
 
 .span-2{
   grid-column: span 2;
 }
 
-h1 {
-  background-color: goldenrod;
-  color: #fff;
-  font-size: 60px;
-  margin: 10px 0px;
-  text-align: center;
-  padding: 20px 0px;
+.operatorButton, 
+.equalButton {
+  background-color: #3b444b;
 }
 
-#mainPage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.clearButton,
+.deleteButton {
+  background-color: #414a4c;
 }
